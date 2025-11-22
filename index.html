@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azher — Senior Product Associate, Gain.pro</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for custom colors and font --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#111827', // Dark Slate
+                        'secondary-dark': '#1F2937', // Slightly lighter dark for cards
+                        'accent': '#3B82F6', // Blue accent
+                        'accent-light': '#60A5FA',
+                        'text-light': '#F9FAFB',
+                        'text-muted': '#D1D5DB',
+                        'bg-hover': '#2A3644', // New for tab hover background
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'modal-open': { /* New animation for the modal content */
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+                        'modal-open': 'modal-open 0.3s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and scroll behavior for a polished feel */
+        html { scroll-behavior: smooth; }
+        body { background-color: #111827; }
+        
+        /* Apply the fade-in-up animation to main sections on load */
+        .animated-section { opacity: 0; }
+        
+        /* Custom styles for the reading card hover effect */
+        .reading-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .reading-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2); /* Soft blue shadow */
+        }
+
+        /* Specific style for project hover */
+        .project-card:hover .project-title {
+            color: #60A5FA; /* accent-light on hover */
+            transition: color 0.3s ease;
+        }
+
+        /* Utility class to stop modal content from being scaled on load */
+        .modal-content-initial {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        
+        /* Ensure the iframe container is visually consistent */
+        .airtable-container {
+            background-color: #1F2937; /* Secondary dark color */
+            padding: 4px; /* Slight internal padding for border illusion */
+        }
+
+        /* --- Custom Styles for Experience Tabs --- */
+        .exp-tab {
+            transition: all 0.2s ease;
+            position: relative;
+            padding-left: 1.5rem; /* Ensure space for the border marker */
+        }
+        .exp-tab.active {
+            color: #3B82F6; /* Accent Blue */
+            background-color: #1F2937; /* Secondary Dark */
+        }
+        /* Vertical blue bar indicator for the active tab */
+        .exp-tab.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #3B82F6; /* Accent Blue */
+        }
+        /* Hide the vertical bar on mobile when tabs are horizontal */
+        @media (max-width: 767px) {
+            .exp-tab {
+                border-bottom: 2px solid #1F2937; /* Bottom border separator */
+                padding-left: 1rem;
+            }
+            .exp-tab.active::before {
+                display: none;
+            }
+            .exp-tab.active {
+                border-bottom-color: #3B82F6; /* Active bottom border */
+            }
+        }
+    </style>
+</head>
+<body class="text-text-light font-sans antialiased">
+
+    <!-- NAVIGATION --><header class="sticky top-0 z-50 bg-primary-dark/95 backdrop-blur-sm shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold text-accent-light">Azher.pm</a>
+            <div class="space-x-4 text-text-muted hidden md:flex">
+                <a href="#about" class="hover:text-accent transition duration-300">About</a>
+                <a href="#experience" class="hover:text-accent transition duration-300">Experience</a>
+                <a href="#projects" class="hover:text-accent transition duration-300">Projects</a>
+                <a href="#reading" class="hover:text-accent transition duration-300">Learning Log</a>
+                <a href="#contact" class="hover:text-accent transition duration-300">Contact</a>
+            </div>
+            <a href="#contact" class="bg-accent hover:bg-accent-light text-primary-dark font-semibold py-2 px-4 rounded-full transition duration-300 text-sm hidden sm:block">
+                Get In Touch
+            </a>
+            <!-- Mobile Menu Button (Not functional without complex JS, so simplifying) --></nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- HERO / INTRODUCTION SECTION -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="hero" class="min-h-[80vh] flex items-center pt-24 pb-12 animated-section" style="animation-delay: 0.1s;">
+            <div class="lg:w-3/4">
+                <h4 class="text-text-muted text-lg mb-4 font-medium tracking-wider uppercase">Hi, I’m Azher Hussain</h4>
+                <h1 class="text-5xl sm:text-7xl font-extrabold text-text-light leading-tight mb-4">
+                    Turning Private-Market Complexity into <span class="text-accent">AI-Enabled Clarity</span>
+                </h1>
+                <p class="text-xl text-text-muted mt-6 max-w-2xl">
+                    I am a Senior Product Associate at Gain.pro, where I build data-driven products that equip investors and M&A professionals with fast, reliable, and actionable insights. I specialize in transforming complex private-market data into intuitive workflows, working at the crossroads of product strategy, data engineering, and user research to solve the real analytical challenges facing deal teams today.
+                </p>
+                <div class="mt-8 space-x-4">
+                    <a href="#experience" class="bg-accent hover:bg-accent-light text-primary-dark font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 inline-block">
+                        View Experience
+                    </a>
+                    <a href="#projects" class="text-accent border border-accent hover:bg-accent/10 font-bold py-3 px-8 rounded-full transition duration-300 inline-block">
+                        See My Work
+                    </a>
+                </div>
+                <!-- UPDATED: SOCIAL LINKS IN HERO SECTION - RESUME IS NOW AN ICON -->
+                <div class="mt-4 flex items-center space-x-6">
+                    <a href="https://www.linkedin.com/in/azherhussain/" target="_blank" class="text-text-muted hover:text-accent transition duration-300 flex items-center group">
+                        <!-- LinkedIn SVG -->
+                        <svg class="w-6 h-6 text-accent group-hover:text-accent-light" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <span class="ml-2 hidden sm:inline text-sm text-text-muted group-hover:text-text-light">LinkedIn</span>
+                    </a>
+                    <a href="mailto:azherrashid.ar@gmail.com" class="text-text-muted hover:text-accent transition duration-300 flex items-center group">
+                         <!-- Email SVG -->
+                        <svg class="w-6 h-6 text-accent group-hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <span class="ml-2 hidden sm:inline text-sm text-text-muted group-hover:text-text-light">Email</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1M-9c1w0nUQV3GAGuNm-ypxoOhB4RbcbK?usp=drive_link" target="_blank" class="text-text-muted hover:text-accent-light transition duration-300 flex items-center group">
+                        <!-- Resume (Document) SVG -->
+                        <svg class="w-6 h-6 text-accent group-hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m0 0l2 2m0 0l-2 2"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"></path></svg>
+                        <span class="ml-2 hidden sm:inline text-sm text-text-muted group-hover:text-text-light">Resume</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="about" class="py-12 animated-section" style="animation-delay: 0.2s;">
+            <h2 class="text-4xl font-bold border-b-2 border-accent/50 pb-2 mb-8 text-text-light">01. About Me</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Image Section --><div class="md:col-span-1 flex flex-col items-center text-center">
+                    <div class="w-full max-w-xs bg-secondary-dark rounded-xl shadow-2xl p-4 mb-4">
+                        <!-- DEBUGGED IMAGE PATH: Now using simple filename. Requires DSC02745.jpg in the same directory for GitHub Pages. --><img src="DSC02745.jpg" alt="Azher's Professional Headshot" class="rounded-lg w-full h-auto object-cover border-4 border-accent/50" onerror="this.onerror=null; this.src='https://placehold.co/300x300/3B82F6/111827?text=Image+Placeholder';">
+                        
+                    </div>
+                </div>
+
+                <!-- Text Content Section --><div class="md:col-span-2 space-y-6 text-text-muted text-lg">
+                    <p>
+                        I’ve spent the last several years operating at the intersection of private markets data, product strategy, and NLP, building tools that help investors move from raw information to actionable conviction.
+                    </p>
+                    <p>
+                        My background spans valuations, deal sourcing, and market analysis across Europe and North America — experience that shaped how I understand investor workflows, decision-making patterns, and the data signals that truly influence a deal. I’ve evaluated companies across multiple sectors, developed financial and operational assessment frameworks, and worked closely with investment teams who rely on both fundamental and alternative data to identify opportunities.
+                    </p>
+                    <p>
+                        This foundation naturally led me into product, where I’ve led and contributed to initiatives that blend domain expertise with AI, automation, and scalable data systems.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-text-light pt-4">Notable Product Contributions:</h3>
+                    <ul class="list-disc ml-6 space-y-3 text-base">
+                        <li><strong>Automated Valuation Models at 73 Strings</strong> – leveraging big-data signals to generate CCA, CCM, and income-based valuations.</li>
+                        <li><strong>ML-powered Transcript Intelligence</strong> – entity extraction, topic classification, and sentiment scoring for real-time insights.</li>
+                        <li><strong>Excel Add-in for Private & Public Market Analysis</strong> – bringing structured valuation and screening capabilities directly into analysts' workflows.</li>
+                        <li><strong>Gain.pro Chrome Extension</strong> – surfacing verified private-market intelligence contextually across the web.</li>
+                        <li><strong>Automated CxO Tracking Engine</strong> – mapping executive data and global talent movements across multiple sources with contact-level precision.</li>
+                    </ul>
+
+                    <!-- Removed the Product & Strategy, Analytics, and Tools sections as requested. -->
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE SECTION - UPDATED TO TABBED INTERFACE -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="experience" class="py-12 animated-section" style="animation-delay: 0.3s;">
+            <h2 class="text-4xl font-bold border-b-2 border-accent/50 pb-2 mb-8 text-text-light">02. Work Experience</h2>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                
+                <!-- Left Column: Company Tabs (Navigation) -->
+                <!-- The vertical divider line is achieved by CSS class 'exp-tab' and the containing div structure -->
+                <div class="md:col-span-1 flex md:flex-col space-x-2 md:space-x-0 md:space-y-2 overflow-x-auto pb-2 md:pb-0 bg-primary-dark md:bg-transparent rounded-lg p-1 md:p-0">
+                    
+                    <!-- Tab 1: Gain.pro - ICONS REMOVED -->
+                    <button id="tab-gainpro" onclick="showExperience('gainpro')" class="exp-tab active text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>Gain.pro</span>
+                        </span>
+                    </button>
+                    
+                    <!-- Tab 2: 73 Strings - ICONS REMOVED -->
+                    <button id="tab-strings" onclick="showExperience('strings')" class="exp-tab text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>73 Strings</span>
+                        </span>
+                    </button>
+
+                    <!-- Tab 3: Udbhata - ICONS REMOVED -->
+                    <button id="tab-udbhata" onclick="showExperience('udbhata')" class="exp-tab text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>Udbhata</span>
+                        </span>
+                    </button>
+                    
+                    <!-- Tab 4: Insynergy - ICONS REMOVED -->
+                    <button id="tab-insynergy" onclick="showExperience('insynergy')" class="exp-tab text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>Insynergy</span>
+                        </span>
+                    </button>
+
+                    <!-- Tab 5: Qrius - ICONS REMOVED -->
+                    <button id="tab-qrius" onclick="showExperience('qrius')" class="exp-tab text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>Qrius</span>
+                        </span>
+                    </button>
+
+                    <!-- Tab 6: PCS Securities - ICONS REMOVED -->
+                    <button id="tab-pcs" onclick="showExperience('pcs')" class="exp-tab text-left text-sm md:text-lg font-semibold py-3 px-3 rounded-lg flex-shrink-0 md:flex-shrink w-full hover:bg-bg-hover text-text-muted hover:text-accent">
+                        <span class="flex items-center space-x-2">
+                            <span>PCS Securities</span>
+                        </span>
+                    </button>
+                    
+                </div>
+
+                <!-- Right Column: Experience Details (Content Container) -->
+                <!-- REMOVED min-h-[300px] -->
+                <div class="md:col-span-3 bg-secondary-dark p-6 rounded-xl shadow-2xl">
+                    
+                    <!-- Content 1: Gain.pro -->
+                    <div id="content-gainpro" class="exp-content">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-semibold text-accent-light">Senior Product Associate</h3>
+                            <span class="text-text-muted text-sm font-light">10/2023 – Present</span>
+                        </div>
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED: Concise Gain.pro description -->
+                        <p class="text-text-muted mb-6">
+                            At Gain.pro, I build data products that help investors and M&A professionals make quicker, more confident decisions. My work sits at the intersection of private-market intelligence, product strategy, and applied AI. I focus on turning complex datasets into clear, scalable workflows. I enjoy solving analytical problems and shaping product experiences that directly impact how deal teams source, screen, and evaluate opportunities.
+                        </p>
+                    </div>
+                    
+                    <!-- Content 2: 73 Strings -->
+                    <div id="content-strings" class="exp-content hidden">
+                        <div class="flex justify-between items-start mb-2">
+                            <!-- UPDATED ROLE TITLE -->
+                            <h3 class="text-2xl font-semibold text-text-light">Product Associate</h3>
+                            <!-- UPDATED DATES -->
+                            <span class="text-text-muted text-sm font-light">01/2019 – 06/2023</span>
+                        </div>
+                        <!-- REMOVED: <p class="text-xl font-medium text-text-light mb-4">73 Strings</p> -->
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED DESCRIPTION -->
+                        <p class="text-text-muted mb-6">
+                            At 73 Strings, I worked on automating private-market valuations end-to-end. I helped build CCA, CCM, DCF, and scenario-based modules powered by large-scale data ingestion, NLP, and a company knowledge graph. My focus was on making valuation workflows faster, more consistent, and audit-ready — and this role deepened my understanding of how investors approach value creation and how technology can enhance those decisions.
+                        </p>
+                    </div>
+
+                    <!-- Content 3: Udbhata -->
+                    <div id="content-udbhata" class="exp-content hidden">
+                        <div class="flex justify-between items-start mb-2">
+                            <!-- UPDATED ROLE TITLE -->
+                            <h3 class="text-2xl font-semibold text-text-light">Independent Financial Consultant</h3>
+                            <!-- UPDATED DATES -->
+                            <span class="text-text-muted text-sm font-light">07/2018 – 10/2018</span>
+                        </div>
+                        <!-- REMOVED: <p class="text-xl font-medium text-text-light mb-4">Udbhata</p> -->
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED DESCRIPTION -->
+                        <p class="text-text-muted mb-6">
+                            At Udbhata, I helped the management team prepare their financial pitch deck for investors. I worked on building the pitch narrative, creating financial models, structuring valuation assumptions, and shaping the overall messaging. This was my first exposure to SaaS business models, and it gave me a clear understanding of how early-stage companies think about growth, metrics, and investor expectations, a foundation that later influenced my transition into product and private-market analysis.
+                        </p>
+                    </div>
+                    
+                    <!-- Content 4: Insynergy -->
+                    <div id="content-insynergy" class="exp-content hidden">
+                        <div class="flex justify-between items-start mb-2">
+                            <!-- UPDATED ROLE TITLE -->
+                            <h3 class="text-2xl font-semibold text-text-light">Independent Risk Consultant</h3>
+                            <!-- UPDATED DATES -->
+                            <span class="text-text-muted text-sm font-light">12/2017 – 03/2018</span>
+                        </div>
+                        <!-- REMOVED: <p class="text-xl font-medium text-text-light mb-4">Insynergy</p> -->
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED DESCRIPTION -->
+                        <p class="text-text-muted mb-6">
+                            At Insynergy, I worked across risk, strategy, and operational initiatives while building a solid foundation in research and structured analysis. I helped conceptualize a Risk Management Framework for the “Nx” ERM software using COSO 2017 and ISO 31000, identified KPIs/KRIs for Construction and Pharma clients, and supported the addition of new consulting services through business model development. I also led the email marketing campaign for the “DAKSA” ERM workshop, generating ₹1.2 lakh in revenue, and managed its CPD certification and collateral. The role strengthened my analytical thinking, communication skills, and ability to work across teams.
+                        </p>
+                    </div>
+                    
+                    <!-- Content 5: Qrius -->
+                    <div id="content-qrius" class="exp-content hidden">
+                        <div class="flex justify-between items-start mb-2">
+                            <!-- UPDATED ROLE TITLE -->
+                            <h3 class="text-2xl font-semibold text-text-light">Marketing Analyst (Intern)</h3>
+                            <!-- UPDATED DATES -->
+                            <span class="text-text-muted text-sm font-light">07/2017</span>
+                        </div>
+                        <!-- REMOVED: <p class="text-xl font-medium text-text-light mb-4">Qrius</p> -->
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED DESCRIPTION -->
+                        <p class="text-text-muted mb-6">
+                            At Qrius, I focused on research-driven writing and data verification for published articles while supporting growth through social, peer-to-peer, and email campaigns that increased website traffic and user sign-ups by $\sim 5\%$. I also researched persuasion tactics for a thesis titled Psychology of Persuasion, presenting recommendations to improve user engagement. This role strengthened my ability to communicate clearly and translate complex ideas into simple, compelling insights.
+                        </p>
+                    </div>
+                    
+                    <!-- Content 6: PCS Securities -->
+                    <div id="content-pcs" class="exp-content hidden">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-semibold text-text-light">Equity Analyst</h3>
+                            <span class="text-text-muted text-sm font-light">03/2016 – 11/2016</span>
+                        </div>
+                        <!-- REMOVED: <p class="text-xl font-medium text-text-light mb-4">PCS Securities</p> -->
+                        <p class="text-xl font-medium text-text-light mb-4"></p>
+                        <!-- UPDATED DESCRIPTION -->
+                        <p class="text-text-muted mb-6">
+                            PCS Securities gave me my earliest exposure to financial markets and investment evaluation. I supported research work, tracked market movements, and learned how analysts think when evaluating companies experience that planted the seeds for my later interest in valuations, private markets, and data-driven decision-making.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- PROJECT SHOWCASES SECTION -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="projects" class="py-12 animated-section" style="animation-delay: 0.4s;">
+            <h2 class="text-4xl font-bold border-b-2 border-accent/50 pb-2 mb-8 text-text-light">03. Project Showcases</h2>
+            <p class="text-xl text-text-muted mb-8 max-w-3xl">
+                These personal projects demonstrate my hands-on ability to ship and iterate, applying product thinking outside of my day job.
+            </p>
+            
+            <!-- Project Grid Container -->
+            <div id="project-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- PROJECT CARD 1 (Visible) -->
+                <!-- Added h-full to the outer card container to force vertical stretch -->
+                <div id="project-1-card" onclick="openModal('project-modal', 'project-1-details')" class="project-card block p-6 bg-secondary-dark rounded-xl shadow-xl border border-secondary-dark transition duration-500 hover:border-accent hover:shadow-accent/30 cursor-pointer h-full">
+                    <div class="h-full flex flex-col">
+                        <h3 class="project-title text-2xl font-semibold text-text-light mb-2">
+                            Automated Valuation Engine
+                        </h3>
+                        <p class="text-sm font-medium text-accent mb-4">Private Markets / Applied AI</p>
+                        <p class="text-text-muted mb-4 flex-grow">
+                            Spearheaded product development for a valuation engine that uses NLP and graph intelligence to automate CCA/CCM analysis for investors. Click for the full case study.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono mt-auto">
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">NLP</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Graph DB</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">FinTech</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Valuation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT CARD 2 (Visible) -->
+                <!-- The new Earnings Call Intelligence project is inserted here -->
+                <div id="project-2-card" onclick="openModal('project-modal', 'project-2-details')" class="project-card block p-6 bg-secondary-dark rounded-xl shadow-xl border border-secondary-dark transition duration-500 hover:border-accent hover:shadow-accent/30 cursor-pointer h-full">
+                    <div class="h-full flex flex-col">
+                        <h3 class="project-title text-2xl font-semibold text-text-light mb-2">
+                            Earnings Call Intelligence
+                        </h3>
+                        <p class="text-sm font-medium text-accent mb-4">NLP / AI / Public Markets</p>
+                        <p class="text-text-muted mb-4 flex-grow">
+                            Using NLP to turn earnings calls into structured, real-time insights for investors. The platform extracted entities, classified management commentary, and analyzed sentiment shifts.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono mt-auto">
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">NLP & ML</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Sentiment</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Trend Analysis</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Public Equities</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- PROJECT CARD 3 (Visible) - REPLACED WITH EXCEL ADD-IN -->
+                <div id="project-3-card" onclick="openModal('project-modal', 'project-3-details')" class="project-card block p-6 bg-secondary-dark rounded-xl shadow-xl border border-secondary-dark transition duration-500 hover:border-accent hover:shadow-accent/30 cursor-pointer h-full">
+                    <div class="h-full flex flex-col">
+                        <h3 class="project-title text-2xl font-semibold text-text-light mb-2">
+                            Excel Add-In for Market & Valuation Analysis
+                        </h3>
+                        <p class="text-sm font-medium text-accent mb-4">Workflow Automation / FinTech</p>
+                        <p class="text-text-muted mb-4 flex-grow">
+                            Brought verified company intelligence and screening capabilities directly into Excel for faster, more reliable valuation and market analysis.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono mt-auto">
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">API Integration</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Workflow Design</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Data Consistency</span>
+                            <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HIDDEN PROJECTS CONTAINER -->
+                <div id="hidden-projects" class="contents hidden">
+                    <!-- PROJECT CARD 4 (Hidden by default) -->
+                    <div id="project-4-card" onclick="openModal('project-modal', 'project-4-details')" class="project-card block p-6 bg-secondary-dark rounded-xl shadow-xl border border-secondary-dark transition duration-500 hover:border-accent hover:shadow-accent/30 cursor-pointer h-full">
+                        <div class="h-full flex flex-col">
+                            <h3 class="project-title text-2xl font-semibold text-text-light mb-2">
+                                Real-Time Digital Ad Strategy
+                            </h3>
+                            <p class="text-sm font-medium text-accent mb-4">Hackathon / AI & Automation</p>
+                            <p class="text-text-muted mb-4 flex-grow">
+                                Automating competitor ad analysis with browser agents, GPT, and a unified insights dashboard built during a 48-hour hackathon.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono mt-auto">
+                                <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">GPT-4</span>
+                                <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Browser Agents</span>
+                                <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">JSON Schema</span>
+                                <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Real-Time Data</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW MORE / SHOW LESS BUTTON - ALIGNED RIGHT -->
+            <div class="flex justify-start md:justify-end mt-12">
+                <button id="toggle-projects-button" onclick="toggleProjects()" class="bg-secondary-dark text-accent border border-accent hover:bg-accent/10 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    View More Projects
+                </button>
+            </div>
+
+        </section>
+        
+        <!-- READING AND LEARNING LOG SECTION (Now 04.) - UPDATED TO AIRTABLE EMBED -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="reading" class="py-12 animated-section" style="animation-delay: 0.5s;">
+            <h2 class="text-4xl font-bold border-b-2 border-accent/50 pb-2 mb-8 text-text-light">04. Learning Log: Currently Reading</h2>
+            <p class="text-xl text-text-muted mb-8 max-w-3xl">
+                I believe continuous learning is essential for product managers. Here is my curated list of market intelligence sources, books, and courses I am currently engaged with.
+            </p>
+            
+            <!-- Airtable Embed for Learning Log -->
+            <div class="rounded-xl overflow-hidden shadow-2xl border border-gray-700 airtable-container">
+                <iframe class="airtable-embed" src="https://airtable.com/embed/appbteIQOuu1zPwtr/shrkuKTwgWzeKiEzg" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            
+        </section>
+
+        <!-- CONTACT FORM SECTION (Now 05.) - ICONS ONLY -->
+        <!-- Reduced py-16 to py-12 for tighter spacing -->
+        <section id="contact" class="py-12 animated-section" style="animation-delay: 0.6s;">
+            <h2 class="text-4xl font-bold border-b-2 border-accent/50 pb-2 mb-8 text-text-light">05. Contact</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-xl text-text-muted mb-6">
+                        I'm always open to discussing product strategy, market intelligence, or fascinating books. Feel free to connect!
+                    </p>
+                    <!-- UPDATED: SOCIAL LINKS - ICONS ONLY, NO GITHUB -->
+                    <div class="flex space-x-8 items-center">
+                        <!-- Email Icon -->
+                        <a href="mailto:azherrashid.ar@gmail.com" class="text-text-light hover:text-accent-light transition duration-300 group">
+                            <svg class="w-8 h-8 text-accent group-hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </a>
+                        <!-- LinkedIn Icon -->
+                        <a href="https://www.linkedin.com/in/azherhussain/" target="_blank" class="hover:text-accent transition duration-300 group">
+                            <svg class="w-8 h-8 text-accent hover:text-accent-light" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <!-- Resume Icon -->
+                        <a href="https://drive.google.com/drive/folders/1M-9c1w0nUQV3GAGuNm-ypxoOhB4RbcbK?usp=drive_link" target="_blank" class="hover:text-accent transition duration-300 group">
+                            <svg class="w-8 h-8 text-accent hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m0 0l2 2m0 0l-2 2"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form (Basic, non-functional on its own - requires a service like Formspree or Netlify Forms) --><div class="bg-secondary-dark p-8 rounded-xl shadow-2xl">
+                    <form id="contact-form" action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
+                        <!-- Instructions: You need to set up a service like Formspree or Netlify Forms to get a functional endpoint --><div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-text-light mb-1">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-primary-dark border border-gray-600 rounded-lg focus:border-accent focus:ring focus:ring-accent/50 outline-none transition duration-300">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-text-light mb-1">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-primary-dark border border-gray-600 rounded-lg focus:border-accent focus:ring focus:ring-accent/50 outline-none transition duration-300">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-text-light mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 bg-primary-dark border border-gray-600 rounded-lg focus:border-accent focus:ring focus:ring-accent/50 outline-none transition duration-300"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent hover:bg-accent-light text-primary-dark font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-[1.01]">
+                            Send Message
+                        </button>
+                        <p id="form-message" class="mt-4 text-center text-sm text-text-muted hidden">Message sent successfully!</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- MODAL CONTAINER 1: PROJECT DETAIL --><div id="project-modal" class="fixed inset-0 bg-primary-dark/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <!-- Project 1: Automated Valuation Engine --><div class="bg-secondary-dark p-8 rounded-xl shadow-2xl max-w-5xl w-full h-full md:max-h-[90vh] overflow-y-auto modal-content-initial" id="project-1-details">
+            
+            <div class="flex justify-between items-start border-b border-gray-700 pb-4 mb-4 sticky top-0 bg-secondary-dark z-10">
+                <h3 class="text-3xl font-bold text-accent-light">Automated Valuation Engine — 73 Strings</h3>
+                <button onclick="closeModal('project-modal', 'project-1-details')" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
+                    <!-- Close icon (X) --><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Detailed Case Study Content: Two-Column Layout -->
+            <div class="grid md:grid-cols-3 gap-8 text-text-muted">
+                
+                <!-- Timeline / Sidebar (md:col-span-1) -->
+                <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl sticky top-20 h-fit">
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
+                    
+                    <p class="text-sm font-medium">
+                        <span class="text-text-light">Project Type:</span> Company
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Company Name:</span> 73 Strings
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Total Duration:</span> 9 months
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">My Role:</span> PM, Valuation Product & Strategy Lead
+                    </p>
+
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 pt-4 mb-2">Key Technologies</h4>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">NLP & ML</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Graph Databases</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Vector Similarity</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Data Pipelines</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">UX/Figma</span>
+                    </div>
+                </div>
+
+                <!-- Main Narrative (md:col-span-2) -->
+                <div class="md:col-span-2 space-y-8">
+
+                    <!-- Overview -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Overview</h4>
+                        <p>
+                            At 73 Strings, I led product development for an Automated Valuation Engine that transformed how PE/VC investors, LPs, and valuation teams perform CCA, CCM, income-based valuations, and scenario analysis. The system combined big-data ingestion, NLP, and network-graph intelligence, processing $10M$ datapoints monthly to deliver fast, consistent, and audit-ready valuation outputs.
+                        </p>
+                    </div>
+
+                    <!-- Problem -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">The Problem</h4>
+                        <p>
+                            Private-market valuation was slow, manual, and inconsistent. Analysts spent hours sourcing comps, cleaning datasets, and justifying assumptions. Data was fragmented, comp selection was subjective, and audit trails was weak. The industry needed a repeatable, transparent, and data-driven valuation workflow.
+                        </p>
+                    </div>
+
+                    <!-- My Role -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">My Role</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>PM owning valuation modules, similarity logic, and UX.</li>
+                            <li>Partnered with data science & engineering on models and pipelines.</li>
+                            <li>Conducted user research with PE/VC valuation teams.</li>
+                            <li>Defined scoring logic, thresholds, and comp-recommendation framework.</li>
+                            <li>Oversaw ingestion of $10M$ monthly datapoints across filings, reports & web sources.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Approach -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Approach</h4>
+                        <p>The core innovation centered on moving beyond simple industry codes to capture genuine business similarity using a knowledge graph.  </p>
+                        <ol class="list-decimal ml-6 space-y-3">
+                            <li><strong>Unified Data Infrastructure:</strong> Integrated data from 10-Ks, industry reports, M&A databases, and unstructured web sources using NLP and entity resolution.</li>
+                            <li><strong>Company Knowledge Graph:</strong> Built a graph capturing industries, revenue models, growth patterns, investor relationships, and product/market attributes for more intelligent comp relevance.</li>
+                            <li><strong>Comp Recommendation Engine:</strong> Used vector similarity, ratio clustering, graph proximity, and financial filters to automatically identify high-quality CCA and CCM comps.</li>
+                            <li><strong>Automated Valuation Modules:</strong>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>CCA: auto-filtered comps, removed outliers, generated weighted multiples.</li>
+                                    <li>CCM: surfaced relevant transactions with deal context.</li>
+                                    <li>Income Approach: streamlined DCF with WACC suggestions.</li>
+                                    <li>Scenario Analysis: downside/base/upside sensitivities.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Analyst-Focused UX:</strong> A clear valuation workspace with editable assumptions, override options, and full auditability.</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Impact -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Impact</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>$10x$ times faster valuation turnaround.</li>
+                            <li>Consistency across teams using standardized models.</li>
+                            <li>Improved comp accuracy with graph-based matching.</li>
+                            <li>Scalability: $10M$ datapoints processed monthly.</li>
+                            <li>Audit-ready outputs increasing trust & transparency.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Learnings -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Key Learnings</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Explainable AI drives adoption.</li>
+                            <li>High-quality comp selection is a data problem, not a modeling problem.</li>
+                            <li>NLP + graph intelligence meaningfully outperform static industry codes.</li>
+                            <li>UX familiarity is critical for analyst adoption.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Project 2: Earnings Call Intelligence -->
+        <div class="bg-secondary-dark p-8 rounded-xl shadow-2xl max-w-5xl w-full h-full md:max-h-[90vh] overflow-y-auto modal-content-initial" id="project-2-details">
+            
+            <div class="flex justify-between items-start border-b border-gray-700 pb-4 mb-4 sticky top-0 bg-secondary-dark z-10">
+                <h3 class="text-3xl font-bold text-accent-light">Earnings Call Intelligence — 73 Strings</h3>
+                <button onclick="closeModal('project-modal', 'project-2-details')" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
+                    <!-- Close icon (X) --><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Detailed Case Study Content: Two-Column Layout -->
+            <div class="grid md:grid-cols-3 gap-8 text-text-muted">
+                
+                <!-- Timeline / Sidebar (md:col-span-1) -->
+                <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl sticky top-20 h-fit">
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
+                    
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Project Type:</span> Company
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Company Name:</span> 73 Strings
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Total Duration:</span> 6 months
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">My Role:</span> PM, NLP Pipeline & Taxonomy
+                    </p>
+
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 pt-4 mb-2">Key Technologies</h4>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">BERT Model</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">NLP & ML</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Sentiment Analysis</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Taxonomy Design</span>
+                    </div>
+                </div>
+
+                <!-- Main Narrative (md:col-span-2) -->
+                <div class="md:col-span-2 space-y-8">
+
+                    <!-- Overview -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Overview</h4>
+                        <p>
+                            At 73 Strings, I led product development for an Earnings Call Intelligence system that applied advanced NLP to quarterly earnings call transcripts. The platform extracted entities, classified management commentary into investor-relevant themes, and analyzed sentiment shifts—allowing analysts to understand a company’s outlook in minutes instead of hours.
+                        </p>
+                    </div>
+
+                    <!-- Problem -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">The Problem</h4>
+                        <p>
+                            Earnings calls are dense, unstructured, and time-consuming to analyze:
+                        </p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Calls run 60–90 minutes, with hundreds of lines of dialogue.</li>
+                            <li>Analysts must manually highlight tone changes, risks, and strategy updates.</li>
+                            <li>Traditional keyword search fails to capture context or sentiment.</li>
+                            <li>Insight quality varies significantly across analysts.</li>
+                            <li>Teams struggle to track what changed quarter over quarter.</li>
+                        </ul>
+                        <p class="mt-4">Investors needed a way to instantly surface the key signals buried in each earnings call.</p>
+                    </div>
+
+                    <!-- My Role -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">My Role</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>PM managing the NLP pipeline, domain taxonomy, and insight logic.</li>
+                            <li>Conducted research with PE, public equities professionals to define what matters in earnings calls.</li>
+                            <li>Collaborated with ML engineers to design BERT-based extraction models.</li>
+                            <li>Defined classification buckets, sentiment scoring, and trend-detection rules.</li>
+                            <li>Designed an analyst-friendly UI for surfacing insights quickly.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Approach -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Approach</h4>
+                        <ol class="list-decimal ml-6 space-y-3">
+                            <li><strong>Built a BERT-Powered Earnings Call Pipeline</strong>
+                                <p class="mt-2 mb-2">The NLP system handled:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Entity extraction: competitors, products, geographies, metrics.</li>
+                                    <li>Section detection: prepared remarks vs. Q&A.</li>
+                                    <li>Sentiment scoring: contextual, sentence-level sentiment.</li>
+                                    <li>Tone-shift tracking: detecting caution, optimism, hedging language.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Classified Management Commentary into Investor Themes</strong>
+                                <p class="mt-2 mb-2">We created a domain-specific taxonomy aligned with how analysts evaluate businesses:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Revenue & demand signals.</li>
+                                    <li>Margin and cost drivers.</li>
+                                    <li>Operational performance.</li>
+                                    <li>Competitive updates.</li>
+                                    <li>Product and market expansion.</li>
+                                    <li>Guidance, risks & management uncertainty.</li>
+                                </ul>
+                                <p class="mt-2">This allowed us to summarize the call into theme-based insights, not raw text.</p>
+                            </li>
+                            <li><strong>Highlighted What Changed This Quarter</strong>
+                                <p class="mt-2 mb-2">A key innovation was quarter-over-quarter comparison:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>New risks or uncertainties introduced.</li>
+                                    <li>Changes in tone around revenue, margins, guidance.</li>
+                                    <li>Emerging competitive threats.</li>
+                                    <li>Shifts in management confidence.</li>
+                                </ul>
+                                <p class="mt-2">This turned the product into a tool for narrative trend analysis, not just text parsing.</p>
+                            </li>
+                            <li><strong>Delivered a Real-Time Analyst Workflow</strong>
+                                <p class="mt-2 mb-2">The final interface included:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Theme-level summaries with sentiment bars.</li>
+                                    <li>“Top risks & opportunities” extracted automatically.</li>
+                                    <li>Key quotes and supporting context.</li>
+                                    <li>Q&A insights (often the most revealing part).</li>
+                                    <li>One-click export for valuation memos or internal reporting.</li>
+                                </ul>
+                                <p class="mt-2">Analysts could digest a full earnings call in under one minute.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Impact -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Impact</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Hours $\rightarrow$ minutes for earnings call analysis.</li>
+                            <li>Standardized insight extraction across teams.</li>
+                            <li>Improved accuracy by using contextual NLP over keyword tools.</li>
+                            <li>Enabled faster quarterly reporting cycles.</li>
+                            <li>Supported better trend identification across portfolio companies.</li>
+                            <li>Reinforced 73 Strings’ positioning as an AI-driven valuation & intelligence platform.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Learnings -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Key Learnings</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>The Q&A section contains the most valuable, least structured insight.</li>
+                            <li>Tone shifts matter more than absolute sentiment.</li>
+                            <li>Sector-specific taxonomies outperform generic NLP models.</li>
+                            <li>Analysts need explainable insights—transparency drives adoption.</li>
+                            <li>Context windows in earnings calls are critical for accurate classification.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Project 3: Excel Add-In for Market & Valuation Analysis --><div class="bg-secondary-dark p-8 rounded-xl shadow-2xl max-w-5xl w-full h-full md:max-h-[90vh] overflow-y-auto modal-content-initial" id="project-3-details">
+            
+            <div class="flex justify-between items-start border-b border-gray-700 pb-4 mb-4 sticky top-0 bg-secondary-dark z-10">
+                <h3 class="text-3xl font-bold text-accent-light">Excel Add-In for Market & Valuation Analysis — Gain.pro</h3>
+                <button onclick="closeModal('project-modal', 'project-3-details')" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
+                    <!-- Close icon (X) --><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Detailed Case Study Content: Two-Column Layout -->
+            <div class="grid md:grid-cols-3 gap-8 text-text-muted">
+                
+                <!-- Timeline / Sidebar (md:col-span-1) -->
+                <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl sticky top-20 h-fit">
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
+                    
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Project Type:</span> Company
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Company Name:</span> Gain.pro
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Total Duration:</span> 6 months
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">My Role:</span> PM, Workflow Automation & Integration
+                    </p>
+
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 pt-4 mb-2">Key Technologies</h4>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Excel Add-in SDK</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">API Integration</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Authentication (SSO)</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Data Caching</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">UX/Ribbon Design</span>
+                    </div>
+                </div>
+
+                <!-- Main Narrative (md:col-span-2) -->
+                <div class="md:col-span-2 space-y-8">
+
+                    <!-- Overview -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Overview</h4>
+                        <p>
+                            At Gain.pro, I led product development for an Excel Add-In designed to bring verified company intelligence, financial data, and screening capabilities directly into the workflows of private equity investors, investment bankers, and corporate development teams. The plugin enabled users to pull Gain.pro data straight into Excel models, automate comps, and build faster market/valuation analyses—all without switching tools.
+                        </p>
+                    </div>
+
+                    <!-- Problem -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">The Problem</h4>
+                        <p>
+                            Despite modern intelligence platforms, analysts still run their core financial analysis inside Excel:
+                        </p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Valuations, comparables, and deal models all live in spreadsheets.</li>
+                            <li>Pulling company data from different sources is slow and error-prone.</li>
+                            <li>Analysts manually copy/paste data from platforms into Excel.</li>
+                            <li>Data becomes outdated quickly, requiring constant refreshes.</li>
+                            <li>Teams need consistent, audit-ready numbers across models.</li>
+                        </ul>
+                        <p class="mt-4">Users wanted to work where they already spend their time—Excel—without losing Gain.pro’s depth and accuracy.</p>
+                    </div>
+
+                    <!-- My Role -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">My Role</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>PM owning product vision, feature definition, and integration logic.</li>
+                            <li>Ran discovery sessions with PE, IB, and CorpDev analysts to understand workflows.</li>
+                            <li>Designed the functions library (company lookup, financials, KPIs, comps, filters).</li>
+                            <li>Worked with engineers on API endpoints, data caching, and authentication flow.</li>
+                            <li>Partnered with UX to design a lightweight ribbon and intuitive formula builder.</li>
+                            <li>Established data validation and consistency rules across models.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Approach -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Approach</h4>
+                        <ol class="list-decimal ml-6 space-y-3">
+                            <li><strong>Mapped Analyst Workflows Inside Excel</strong>
+                                <p class="mt-2 mb-2">We observed real investment teams using:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>CCA/CCM models.</li>
+                                    <li>Commercial due diligence models.</li>
+                                    <li>Market sizing sheets.</li>
+                                    <li>Growth benchmarking frameworks.</li>
+                                </ul>
+                                <p class="mt-2">This shaped the feature set to match actual usage patterns, not theoretical ones.</p>
+                            </li>
+                            <li><strong>Integrated with Core Gain.pro APIs</strong>
+                                <p class="mt-2 mb-2">We set up:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Secure authentication (SSO + API keys).</li>
+                                    <li>Caching layers for faster refresh cycles.</li>
+                                    <li>Server-side validation to ensure consistent numbers vs. the platform.</li>
+                                    <li>Usage analytics to track formula adoption.</li>
+                                </ul>
+                                <p class="mt-2">This ensured accuracy and reliability for deal teams.</p>
+                            </li>
+                            <li><strong>Designed an Analyst-Friendly Ribbon UI</strong>
+                                <p class="mt-2 mb-2">The ribbon included:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>A formula builder for non-technical users.</li>
+                                    <li>Pre-built templates (CCA, CCM, screening, market maps).</li>
+                                    <li>A smart search bar for company lookup.</li>
+                                    <li>One-click data refresh.</li>
+                                </ul>
+                                <p class="mt-2">The goal: zero learning curve.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Impact -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Impact</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Analysts saved hours per week on data gathering.</li>
+                            <li>Eliminated manual copy/paste errors and outdated data.</li>
+                            <li>CCA/CCM workflows became significantly faster.</li>
+                            <li>Teams built more consistent valuation and deal models.</li>
+                            <li>Increased use of Gain.pro data inside due-diligence deliverables.</li>
+                            <li>Strengthened Gain.pro’s stickiness in analyst workflows.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Learnings -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Key Learnings</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Excel is still the “source of truth” for financial users—meeting them there drives adoption.</li>
+                            <li>Custom formulas must be transparent and editable, not black boxes.</li>
+                            <li>Speed matters; analysts abandon tools that slow down models.</li>
+                            <li>Templates accelerate onboarding more than documentation ever will.</li>
+                            <li>Accuracy and consistency are the primary trust drivers for IB and PE users.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Project 4: Real-Time Digital Ad Strategy (Hackathon) -->
+        <div class="bg-secondary-dark p-8 rounded-xl shadow-2xl max-w-5xl w-full h-full md:max-h-[90vh] overflow-y-auto modal-content-initial" id="project-4-details">
+            
+            <div class="flex justify-between items-start border-b border-gray-700 pb-4 mb-4 sticky top-0 bg-secondary-dark z-10">
+                <h3 class="text-3xl font-bold text-accent-light">Real-Time Digital Ad Strategy — Hackathon Project</h3>
+                <button onclick="closeModal('project-modal', 'project-4-details')" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
+                    <!-- Close icon (X) --><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Detailed Case Study Content: Two-Column Layout -->
+            <div class="grid md:grid-cols-3 gap-8 text-text-muted">
+                
+                <!-- Timeline / Sidebar (md:col-span-1) -->
+                <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl sticky top-20 h-fit">
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
+                    
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Project Type:</span> Personal/Hackathon
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">Total Duration:</span> 48 hours
+                    </p>
+                    <p class="text-sm font-medium">
+                        <span class="text-light">My Role:</span> PM, Design, & Full Stack POC
+                    </p>
+                    <p class="text-sm font-medium flex items-center group">
+                        <span class="text-light">Project Link:</span> 
+                        <!-- Link Icon SVG -->
+                        <a href="https://devfolio.co/projects/real-time-digital-ad-strategy-for-marketers-afca" target="_blank" class="text-accent hover:text-accent-light ml-2 transition duration-300 flex items-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </p>
+
+                    <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 pt-4 mb-2">Key Technologies</h4>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">GPT Analysis</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Browser Agents</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">JSON Schema</span>
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded-full">Real-Time Data</span>
+                    </div>
+                </div>
+
+                <!-- Main Narrative (md:col-span-2) -->
+                <div class="md:col-span-2 space-y-8">
+
+                    <!-- Overview -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Overview</h4>
+                        <p>
+                            In a 48-hour product hackathon at Gain.pro, I built a proof-of-concept platform that automates competitive ad research for marketers. Instead of manually tracking ads across Meta, Google, or LinkedIn and piecing insights together, the solution uses browser agents, structured GPT analysis, and a real-time dashboard to surface messaging themes, top ads, industry trends, and targeted recommendations instantly.
+                        </p>
+                    </div>
+
+                    <!-- Problem -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">The Problem</h4>
+                        <p>
+                            Marketers spend hours every week collecting competitor ads manually:
+                        </p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Switching between Meta, Google, and LinkedIn ad libraries.</li>
+                            <li>Taking screenshots or copying text into ChatGPT.</li>
+                            <li>Losing visual context and dealing with unstructured output.</li>
+                            <li>No real-time view of competitor activity.</li>
+                        </ul>
+                        <p class="mt-4">With $6.5M+$ marketers globally and $10M+$ Facebook advertisers, competitive ad intelligence is critical—but the current workflow is fragmented, repetitive, and slow. Most marketers get stuck in data collection mode instead of strategy development.</p>
+                    </div>
+
+                    <!-- My Role -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">My Role</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Led product design, data workflows, and insight structure.</li>
+                            <li>Designed browser-agent scraping logic (Meta $\rightarrow$ competitors $\rightarrow$ variants).</li>
+                            <li>Built the GPT-powered analysis engine with structured outputs.</li>
+                            <li>Designed and built the unified dashboard for ads + insights.</li>
+                            <li>Created evaluation logic for “top ads” and industry trends.</li>
+                            <li>Delivered the final demo at the hackathon.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Approach -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Approach</h4>
+                        <ol class="list-decimal ml-6 space-y-3">
+                            <li><strong>Automated Browser Agents for Scraping</strong>
+                                <p class="mt-2 mb-2">The system automatically captures:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Ad creative (headline, body, CTA).</li>
+                                    <li>Platform context.</li>
+                                    <li>Competitor identity.</li>
+                                    <li>Variants and placements.</li>
+                                    <li>Recency and activity window.</li>
+                                </ul>
+                                <p class="mt-2">Ads are instantly categorized by competitor for real-time monitoring.</p>
+                            </li>
+                            <li><strong>GPT-Based Structured Analysis</strong>
+                                <p class="mt-2 mb-2">The AI layer performs:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Message & tone analysis.</li>
+                                    <li>Audience inference.</li>
+                                    <li>Theme detection across a competitor’s portfolio.</li>
+                                    <li>Ranking of top ads per competitor.</li>
+                                    <li>Cross-competitor synthesis (industry themes).</li>
+                                    <li>Custom recommendations for the user’s own brand.</li>
+                                </ul>
+                                <p class="mt-2">All outputs follow a schema-first JSON format to prevent drift.</p>
+                            </li>
+                            <li><strong>Unified Insights Dashboard</strong>
+                                <p class="mt-2 mb-2">One interface shows:</p>
+                                <ul class="list-circle ml-6 space-y-1">
+                                    <li>Real ads with visuals.</li>
+                                    <li>Status of scrapers.</li>
+                                    <li>AI-generated insights.</li>
+                                    <li>Competitor comparisons.</li>
+                                    <li>Industry-level patterns.</li>
+                                    <li>Recommendations.</li>
+                                </ul>
+                                <p class="mt-2">Designed for fast strategy alignment in weekly marketing rituals.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Challenges & Solutions</h4>
+                        <p class="text-text-light font-semibold mt-4">Challenge: No Ground-Truth Performance Data</p>
+                        <p>Public ad libraries don’t show actual performance metrics.</p>
+                        <p class="text-text-light font-semibold mt-4">Solution:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Created a transparent proxy scoring model combining: Recency, Creative longevity (days active), Number of variants, Placement coverage, Engagement signals (when available), and Brand reuse patterns.</li>
+                            <li>Weights are editable in the UI for explainability.</li>
+                        </ul>
+                        
+                        <p class="text-text-light font-semibold mt-4">Challenge: GPT Drift & Hallucinations</p>
+                        <p>Early versions invented audiences or changed output structure.</p>
+                        <p class="text-text-light font-semibold mt-4">Solution:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Schema-first prompting (JSON + Pydantic validation).</li>
+                            <li>Grounding via structured ad text only.</li>
+                            <li>Prompt versioning.</li>
+                            <li>Regression tests on a mini dataset to ensure consistent insights.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Impact -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Impact</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Hours of manual work reduced to seconds.</li>
+                            <li>Reliable, repeatable, structured insights.</li>
+                            <li>Real-time competitor monitoring.</li>
+                            <li>Clear foundation for a production-grade ad intelligence tool.</li>
+                            <li>Strong positive reception at the hackathon.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Learnings -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-text-light mb-2">Key Learnings</h4>
+                        <ul class="list-disc ml-6 space-y-2 text-base">
+                            <li>Marketers need explainability more than automation.</li>
+                            <li>Schema-first design is essential for stable AI outputs.</li>
+                            <li>Proxy scoring can outperform raw ad-library browsing for strategic insights.</li>
+                            <li>Real-time visibility drives better creative iteration cycles.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- FOOTER --><footer class="bg-secondary-dark mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-text-muted text-sm">
+            <!-- UPDATED: SOCIAL LINKS IN FOOTER SECTION - ICONS ONLY, NO GITHUB -->
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.linkedin.com/in/azherhussain/" target="_blank" class="hover:text-accent transition duration-300">
+                    <svg class="w-6 h-6 text-accent hover:text-accent-light" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="mailto:azherrashid.ar@gmail.com" class="hover:text-accent transition duration-300">
+                    <svg class="w-6 h-6 text-accent hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1M-9c1w0nUQV3GAGuNm-ypxoOhB4RbcbK?usp=drive_link" target="_blank" class="hover:text-accent transition duration-300">
+                    <!-- Resume (Document) SVG -->
+                    <svg class="w-6 h-6 text-accent hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m0 0l2 2m0 0l-2 2"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"></path></svg>
+                </a>
+            </div>
+            <p>&copy; 2025 Azher. Built with Tailwind CSS and lots of coffee.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR INITIAL ANIMATION AND MODAL -->
+    <script>
+        // --- Modal Control Functions ---
+        
+        // Open the specified modal (modalId: 'project-modal')
+        function openModal(modalId, contentId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(contentId);
+
+            // Hide all other modal content first
+            document.querySelectorAll('#project-modal > div').forEach(content => {
+                content.style.display = 'none';
+                content.classList.add('modal-content-initial');
+            });
+            
+            // Show the target content block
+            modalContent.style.display = 'block';
+
+            // Display the modal backdrop
+            modal.style.display = 'flex';
+            
+            // Wait a moment for the display change before applying animation class
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modalContent.classList.remove('modal-content-initial');
+                modalContent.classList.add('animate-modal-open');
+                // Disable scrolling on the main body
+                document.body.style.overflow = 'hidden';
+            }, 10); 
+        }
+
+        // Close the modal
+        function closeModal(modalId, contentId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(contentId);
+            
+            // 1. Start fade-out and scale-down animation
+            modalContent.classList.remove('animate-modal-open');
+            modalContent.classList.add('modal-content-initial');
+
+            modal.style.opacity = '0';
+            
+            // 2. Hide modal entirely after transition
+            setTimeout(() => {
+                modal.style.display = 'none'; // Use 'none' to fully hide the backdrop
+                modalContent.style.display = 'none'; // Hide the content too
+                document.body.style.overflow = ''; // Restore scrolling
+            }, 300);
+        }
+
+        // --- View More/Show Less Logic ---
+        function toggleProjects() {
+            const hiddenContainer = document.getElementById('hidden-projects');
+            const button = document.getElementById('toggle-projects-button');
+
+            if (hiddenContainer.classList.contains('hidden')) {
+                // Show projects
+                hiddenContainer.classList.remove('hidden');
+                // Apply fade-in animation slightly delayed for smoother transition
+                setTimeout(() => {
+                    hiddenContainer.style.opacity = 1;
+                    hiddenContainer.style.height = 'auto';
+                }, 10);
+                button.textContent = 'Show Less Projects';
+                
+                // Scroll up slightly to ensure the new projects are visible after expansion
+                const projectsSection = document.getElementById('projects');
+                projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            } else {
+                // Hide projects
+                hiddenContainer.style.opacity = 0;
+                hiddenContainer.style.height = '0';
+                setTimeout(() => {
+                    hiddenContainer.classList.add('hidden');
+                }, 300); // Wait for fade out
+                button.textContent = 'View More Projects';
+            }
+        }
+
+        // --- Experience Tabs Logic ---
+        function showExperience(companyId) {
+            // 1. Manage Content Display
+            document.querySelectorAll('.exp-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            const targetContent = document.getElementById(`content-${companyId}`);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // 2. Manage Active Tab Styling
+            document.querySelectorAll('.exp-tab').forEach(tab => {
+                tab.classList.remove('active', 'text-accent');
+                // Ensure the icon color is reset for inactive tabs (text-muted)
+                const icon = tab.querySelector('svg');
+                if (icon) {
+                    icon.classList.remove('text-accent');
+                    icon.classList.add('text-text-muted');
+                }
+                tab.classList.add('text-text-muted');
+            });
+            
+            const activeTab = document.getElementById(`tab-${companyId}`);
+            if (activeTab) {
+                activeTab.classList.add('active', 'text-accent');
+                activeTab.classList.remove('text-text-muted');
+                // Ensure the icon color is set for the active tab (text-accent)
+                const icon = activeTab.querySelector('svg');
+                if (icon) {
+                    icon.classList.add('text-accent');
+                    icon.classList.remove('text-text-muted');
+                }
+            }
+        }
+        
+        // --- Event Listeners and Initial Load Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Experience Tabs (Show Gain.pro by default)
+            // Note: We need to use 'gainpro' since the initial active tab is Gain.pro
+            showExperience('gainpro');
+
+            // Close modals when clicking outside the content area
+            document.getElementById('project-modal').addEventListener('click', (e) => {
+                // Only close if click target is the modal backdrop, not the content inside
+                if (e.target.id === 'project-modal') {
+                    // Find the currently visible content block and close it
+                    const visibleContent = document.querySelector('#project-modal > div:not(.modal-content-initial)');
+                    if (visibleContent) {
+                         closeModal('project-modal', visibleContent.id);
+                    }
+                }
+            });
+
+            // Function to trigger fade-in animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.animated-section');
+                elements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    // If the top of the element is within the viewport (0 to window.innerHeight * 0.8)
+                    if (rect.top < window.innerHeight * 0.8) {
+                        el.style.animationPlayState = 'running';
+                        el.style.opacity = '1';
+                    }
+                });
+            };
+
+            // Run on load and on scroll
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+
+            // --- Contact Form Submission Handler (Client-side feedback only) ---
+            const form = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // IMPORTANT: Since this is a static site (GitHub Pages), we cannot process the form server-side.
+                // You must integrate a service like Formspree or Netlify Forms to receive messages.
+                
+                // Simulation of success for demonstration:
+                
+                formMessage.textContent = 'Thank thank you for your message, Azher! I will get back to you soon.';
+                formMessage.classList.remove('hidden');
+                formMessage.classList.add('text-accent');
+                form.reset();
+            });
+
+            // Set initial state for hidden projects container
+            const hiddenContainer = document.getElementById('hidden-projects');
+            if (hiddenContainer) {
+                // Check if the container should be hidden on load. Assuming it should be hidden based on button text.
+                const buttonText = document.getElementById('toggle-projects-button').textContent.trim();
+                if (buttonText === 'View More Projects') {
+                    hiddenContainer.classList.add('hidden');
+                }
+                hiddenContainer.style.opacity = 0;
+                hiddenContainer.style.height = '0';
+            }
+        });
+    </script>
+</body>
+</html>
