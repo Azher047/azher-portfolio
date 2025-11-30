@@ -170,15 +170,23 @@
         }
 
         /* Fix for modal sticky header - prevent content from passing through */
+        /* FIX: Header is relative by default (scrolls with page on mobile) */
         .modal-sticky-header {
-            position: sticky;
+            position: relative; 
             top: 0;
             background-color: #1F2937; /* secondary-dark */
             z-index: 50; /* Ensure it stays above content */
             padding: 2rem; /* p-8 equivalent */
             border-bottom: 1px solid #374151;
-            /* No negative margins needed anymore */
         }
+        
+        /* FIX: Header becomes sticky only on Desktop (md breakpoint) */
+        @media (min-width: 768px) {
+            .modal-sticky-header {
+                position: sticky;
+            }
+        }
+
         /* Add padding to modal content wrapper to prevent overlap */
         .modal-content-wrapper {
             padding: 0 2rem 2rem 2rem; /* px-8 pb-8 equivalent */
@@ -266,11 +274,13 @@
                 <p class="text-xl text-text-muted mt-6 max-w-2xl">
                     I am a Senior Product Associate at Gain.pro, where I build data-driven products that equip investors and M&A professionals with fast, reliable, and actionable insights. I specialize in transforming complex private-market data into intuitive workflows, working at the crossroads of product strategy, data engineering, and user research to solve the real analytical challenges facing deal teams today.
                 </p>
-                <div class="mt-8 space-x-4">
-                    <a href="#experience" class="bg-accent hover:bg-accent-light text-primary-dark font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 inline-block">
+                <!-- FIX: Changed from 'mt-8 space-x-4' to Flex Column for mobile -->
+                <!-- This fixes button overlap on small screens -->
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <a href="#experience" class="bg-accent hover:bg-accent-light text-primary-dark font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 inline-block text-center justify-center">
                         View Experience
                     </a>
-                    <a href="#projects" class="text-accent border border-accent hover:bg-accent/10 font-bold py-3 px-8 rounded-full transition duration-300 inline-block">
+                    <a href="#projects" class="text-accent border border-accent hover:bg-accent/10 font-bold py-3 px-8 rounded-full transition duration-300 inline-block text-center justify-center">
                         See My Work
                     </a>
                 </div>
@@ -699,7 +709,7 @@
             
             <div class="modal-sticky-header">
                 <div class="flex justify-between items-start">
-                    <h3 class="text-3xl font-bold text-accent-light">Automated Valuation Engine — 73 Strings</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold text-accent-light">Automated Valuation Engine — 73 Strings</h3>
                     <button onclick="closeModal('project-modal', 'project-1-details')" aria-label="Close modal" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
                         <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
@@ -710,7 +720,8 @@
                 <div class="grid md:grid-cols-3 gap-8 text-text-muted">
                     
                     <!-- Timeline / Sidebar (md:col-span-1) -->
-                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky">
+                    <!-- FIX: Added order-last on mobile so main content is seen first, improving "scrolling" feel -->
+                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky order-last md:order-first">
                         <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
                         
                         <p class="text-sm font-medium">
@@ -814,7 +825,7 @@
             
             <div class="modal-sticky-header">
                 <div class="flex justify-between items-start">
-                    <h3 class="text-3xl font-bold text-accent-light">Earnings Call Intelligence — 73 Strings</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold text-accent-light">Earnings Call Intelligence — 73 Strings</h3>
                     <button onclick="closeModal('project-modal', 'project-2-details')" aria-label="Close modal" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
                         <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
@@ -825,7 +836,8 @@
                 <div class="grid md:grid-cols-3 gap-8 text-text-muted">
                     
                     <!-- Timeline / Sidebar (md:col-span-1) -->
-                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky">
+                    <!-- FIX: Added order-last on mobile -->
+                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky order-last md:order-first">
                         <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
                         
                         <p class="text-sm font-medium">
@@ -967,7 +979,7 @@
             
             <div class="modal-sticky-header">
                 <div class="flex justify-between items-start">
-                    <h3 class="text-3xl font-bold text-accent-light">Excel Add-In for Market & Valuation Analysis — Gain.pro</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold text-accent-light">Excel Add-In for Market & Valuation Analysis — Gain.pro</h3>
                     <button onclick="closeModal('project-modal', 'project-3-details')" aria-label="Close modal" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
                         <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
@@ -978,7 +990,8 @@
                 <div class="grid md:grid-cols-3 gap-8 text-text-muted">
                     
                     <!-- Timeline / Sidebar (md:col-span-1) -->
-                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky">
+                    <!-- FIX: Added order-last on mobile -->
+                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky order-last md:order-first">
                         <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
                         
                         <p class="text-sm font-medium">
@@ -1110,7 +1123,7 @@
             
             <div class="modal-sticky-header">
                 <div class="flex justify-between items-start">
-                    <h3 class="text-3xl font-bold text-accent-light">Real-Time Digital Ad Strategy — Hackathon Project</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold text-accent-light">Real-Time Digital Ad Strategy — Hackathon Project</h3>
                     <button onclick="closeModal('project-modal', 'project-4-details')" aria-label="Close modal" class="text-text-muted hover:text-text-light ml-4 transition duration-300 flex-shrink-0">
                         <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
@@ -1121,7 +1134,8 @@
                 <div class="grid md:grid-cols-3 gap-8 text-text-muted">
                     
                     <!-- Timeline / Sidebar (md:col-span-1) -->
-                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky">
+                    <!-- FIX: Added order-last on mobile -->
+                    <div class="md:col-span-1 space-y-4 bg-primary-dark p-4 rounded-xl modal-sidebar-sticky order-last md:order-first">
                         <h4 class="text-lg font-semibold text-accent-light border-b border-gray-700 pb-2 mb-2">Project Details</h4>
                         
                         <p class="text-sm font-medium">
