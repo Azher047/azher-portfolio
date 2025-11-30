@@ -149,10 +149,17 @@
             .exp-tab {
                 /* Remove previous list-style borders */
                 border-bottom: none;
-                border: 1px solid transparent; 
-                padding-left: 1rem;
-                text-align: center;
+                /* Add card-like borders for grid items */
+                border: 1px solid #374151; 
+                background-color: rgba(31, 41, 55, 0.3);
+                border-radius: 0.5rem;
+                
+                /* Reset padding and force centering */
+                padding: 0.75rem;
+                display: flex;
+                align-items: center;
                 justify-content: center;
+                text-align: center;
             }
             .exp-tab.active::before {
                 display: none; /* Hide vertical bar on mobile */
@@ -166,6 +173,7 @@
             /* Center the text/content in the mobile buttons */
             .exp-tab span {
                 justify-content: center;
+                width: 100%;
             }
         }
 
@@ -204,7 +212,12 @@
         }
     </style>
 </head>
-<body class="text-text-light font-sans antialiased">
+<body class="text-text-light font-sans antialiased relative">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container" class="fixed top-0 left-0 w-full h-1 z-[60] bg-transparent">
+        <div id="scroll-progress-bar" class="h-full bg-accent w-0 transition-all duration-100 ease-out"></div>
+    </div>
 
     <!-- Skip to main content link for keyboard accessibility -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] bg-accent text-primary-dark px-4 py-2 rounded-lg font-bold transition-colors">
@@ -285,7 +298,7 @@
                     </a>
                 </div>
                 <!-- UPDATED: SOCIAL LINKS IN HERO SECTION - RESUME IS NOW AN ICON -->
-                <div class="mt-4 flex items-center space-x-6">
+                <div class="mt-4 flex items-center gap-6 justify-start">
                     <a href="https://www.linkedin.com/in/azherhussain/" target="_blank" aria-label="LinkedIn Profile" class="text-text-muted hover:text-accent transition duration-300 flex items-center group">
                         <!-- LinkedIn SVG -->
                         <svg aria-hidden="true" class="w-6 h-6 text-accent group-hover:text-accent-light" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -644,13 +657,13 @@
                     </p>
                     <!-- UPDATED: SOCIAL LINKS - ICONS ONLY, NO GITHUB -->
                     <div class="flex space-x-8 items-center">
-                        <!-- Email Icon -->
-                        <a href="mailto:azherrashid.ar@gmail.com" aria-label="Send Email" class="text-text-light hover:text-accent-light transition duration-300 group">
-                            <svg aria-hidden="true" class="w-8 h-8 text-accent group-hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </a>
                         <!-- LinkedIn Icon -->
                         <a href="https://www.linkedin.com/in/azherhussain/" target="_blank" aria-label="LinkedIn Profile" class="hover:text-accent transition duration-300 group">
                             <svg aria-hidden="true" class="w-8 h-8 text-accent hover:text-accent-light" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <!-- Email Icon -->
+                        <a href="mailto:azherrashid.ar@gmail.com" aria-label="Send Email" class="text-text-light hover:text-accent-light transition duration-300 group">
+                            <svg aria-hidden="true" class="w-8 h-8 text-accent group-hover:text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </a>
                         <!-- Resume Icon -->
                         <a href="https://drive.google.com/drive/folders/1M-9c1w0nUQV3GAGuNm-ypxoOhB4RbcbK?usp=drive_link" target="_blank" aria-label="View Resume" class="hover:text-accent transition duration-300 group">
@@ -1309,6 +1322,13 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top" class="fixed bottom-8 right-8 bg-accent hover:bg-accent-light text-primary-dark p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 invisible translate-y-4 hover:-translate-y-1 z-40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
     <!-- JAVASCRIPT FOR INITIAL ANIMATION AND MODAL -->
     <script>
         // --- Modal Control Functions ---
@@ -1505,6 +1525,36 @@
             // Run on load and on scroll
             animateOnScroll();
             window.addEventListener('scroll', animateOnScroll);
+
+            // --- Scroll Progress Bar & Back to Top Logic ---
+            const scrollProgressBar = document.getElementById('scroll-progress-bar');
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                // Progress Bar
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                scrollProgressBar.style.width = scrollPercent + '%';
+
+                // Back to Top Button visibility
+                if (scrollTop > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                    backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+                    backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                }
+            });
+
+            // Back to Top Click Handler
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
 
             // --- Contact Form Submission Handler (Client-side feedback only) ---
             const form = document.getElementById('contact-form');
