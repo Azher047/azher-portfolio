@@ -25,7 +25,49 @@
 
       gtag('config', 'G-CDJG44G0MW');
     </script>
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<
+        <!-- Custom event tracking for GA4 -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelectorAll("a[href]").forEach(function (link) {
+          const href = link.getAttribute("href");
+
+          if (!href) return;
+
+          const isExternal =
+            href.startsWith("http") &&
+            !href.includes(window.location.hostname);
+
+          const isResume =
+            href.toLowerCase().includes("resume") ||
+            href.toLowerCase().includes("cv") ||
+            href.toLowerCase().endsWith(".pdf");
+
+          if (isExternal) {
+            link.addEventListener("click", function () {
+              gtag("event", "outbound_click", {
+                event_category: "engagement",
+                event_label: href,
+                transport_type: "beacon"
+              });
+            });
+          }
+
+          if (isResume) {
+            link.addEventListener("click", function () {
+              gtag("event", "resume_click", {
+                event_category: "conversion",
+                event_label: href,
+                transport_type: "beacon"
+              });
+            });
+          }
+        });
+
+      });
+    </script>
+link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Performance Optimizations: Preconnect to external domains -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -1813,4 +1855,5 @@
     </script>
 </body>
 </html>
+
 
